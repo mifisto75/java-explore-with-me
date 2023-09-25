@@ -11,23 +11,33 @@ import java.util.List;
 public interface StatsRepository extends JpaRepository<EndpointHit, Integer> {
 
 
-
-
-//смотрит стотистику отдельного юзера по IP
-    @Query("SELECT new ru.practicum.exploreWithMe.model.ViewStats(hit.app, hit.uri, COUNT(hit.ip)) " +
+    @Query("SELECT new ru.practicum.exploreWithMe.model.ViewStats(hit.app, hit.uri, COUNT(DISTINCT hit.ip)) " +
             "FROM EndpointHit hit " +
             "WHERE hit.timestamp BETWEEN ?1 AND ?2 " +
-            "AND hit.ip IN ?3 " +
-            "GROUP BY hit.uri, hit.ip " +
-            "ORDER BY COUNT(hit.ip) DESC")
-    List<ViewStats> all(LocalDateTime start, LocalDateTime end, String ip);
+            "AND hit.uri IN ?3 OR ?3 is NULL " +
+            "GROUP BY hit.app, hit.uri " +
+            "ORDER BY COUNT(DISTINCT hit.ip) DESC")
+    List<ViewStats> uniqueTrue(LocalDateTime start, LocalDateTime end, List<String> uris);
 
-    //смотрит сумарную статистику по всем эндоинтам
+    @Query("SELECT new ru.practicum.exploreWithMe.model.ViewStats(hit.app, hit.uri,COUNT(hit.ip)) " +
+            "FROM EndpointHit hit " +
+            "WHERE hit.timestamp BETWEEN ?1 AND ?2 " +
+            "AND hit.uri IN ?3 OR ?3 is NULL " +
+            "GROUP BY hit.app, hit.uri " +
+            "ORDER BY COUNT(hit.ip) DESC")
+    List<ViewStats> uniqueFalse(LocalDateTime start, LocalDateTime end, List<String> uris);
+
+    @Query("SELECT new ru.practicum.exploreWithMe.model.ViewStats(hit.app, hit.uri, COUNT(DISTINCT hit.ip)) " +
+            "FROM EndpointHit hit " +
+            "WHERE hit.timestamp BETWEEN ?1 AND ?2 " +
+            "GROUP BY hit.app, hit.uri " +
+            "ORDER BY COUNT(DISTINCT hit.ip) DESC")
+    List<ViewStats> nullUrisUniqueTrue(LocalDateTime start, LocalDateTime end);
+
     @Query("SELECT new ru.practicum.exploreWithMe.model.ViewStats(hit.app, hit.uri,COUNT(hit.ip)) " +
             "FROM EndpointHit hit " +
             "WHERE hit.timestamp BETWEEN ?1 AND ?2 " +
             "GROUP BY hit.app, hit.uri " +
             "ORDER BY COUNT(hit.ip) DESC")
-    List<ViewStats> OneTimes(LocalDateTime start, LocalDateTime end);
-
+    List<ViewStats> nullUrisUniqueFalse(LocalDateTime start, LocalDateTime end);
 }

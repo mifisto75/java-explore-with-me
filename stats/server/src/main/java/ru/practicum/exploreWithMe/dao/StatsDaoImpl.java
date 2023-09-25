@@ -17,12 +17,18 @@ public class StatsDaoImpl implements StatsDao {
     }
 
     @Override
-    public List<ViewStats> getState(LocalDateTime start , LocalDateTime end , String ip) {
-     if(ip != null){
-         return  statsRepository.all(start,end,ip);
-     }else{
-         return   statsRepository.OneTimes(start,end);
-     }
+    public List<ViewStats> getState(LocalDateTime start, LocalDateTime end, List<String> uris, Boolean unique) {
+        if (unique) {
+            if (uris.get(0).equals("NULL")){
+                return statsRepository.nullUrisUniqueTrue(start,end);
+            }
+            return statsRepository.uniqueTrue(start, end, uris);
+        } else {
+            if (uris.get(0).equals("NULL")){
+                return statsRepository.nullUrisUniqueFalse(start,end);
+            }
+            return statsRepository.uniqueFalse(start, end, uris);
+        }
     }
 
     @Override

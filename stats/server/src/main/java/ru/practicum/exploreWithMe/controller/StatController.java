@@ -16,12 +16,14 @@ public class StatController {
 
     private final StatService statService;
 
+
     public StatController(StatService statService) {
         this.statService = statService;
     }
 
     @PostMapping("/hit")
     public EndpointHitDto saveStat(@RequestBody EndpointHitDto endpointHitDto) {
+        log.info("метод saveStat endpointHitDto = " + endpointHitDto);
         return statService.addState(endpointHitDto);
     }
 
@@ -29,10 +31,14 @@ public class StatController {
     public List<ViewStatsDto> getStats(
             @RequestParam
             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
+
             @RequestParam
             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
-            @RequestParam(required = false) String ip) {
-        return statService.getState(start, end, ip);
+
+            @RequestParam(required = false , defaultValue = "NULL") List<String> uris,
+            @RequestParam(defaultValue = "false") Boolean unique) {
+        log.info("метод getStats start = " + start + " , end = " + end + " uris = " + uris + " unique = " + unique);
+        return statService.getState(start, end, uris, unique);
     }
 }
 

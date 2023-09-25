@@ -13,13 +13,14 @@
     <version>0.0.1</version>
     <name>client</name>
 
-    <dependencies>
 
+    <dependencies>
         <dependency>
         <groupId>ru.practicum</groupId>
         <artifactId>dto</artifactId>
         <version>0.0.1</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -65,14 +66,4 @@
         </dependency>
 
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>

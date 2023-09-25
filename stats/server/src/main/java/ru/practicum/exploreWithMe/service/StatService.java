@@ -20,12 +20,11 @@ public class StatService {
         this.statsDao = statsDao;
     }
 
-    public List<ViewStatsDto> getState(LocalDateTime start , LocalDateTime end , String ip) {
-        if(start.isAfter(end)){
+    public List<ViewStatsDto> getState(LocalDateTime start, LocalDateTime end, List<String> uris, Boolean unique) {
+        if (start.isAfter(end)) {
             throw new BadRequest("некоректные значения start и end (start старше чем end)");
         }
-        statsDao.getState(start , end , ip);
-        return statsDao.getState(start , end , ip)
+        return statsDao.getState(start, end, uris, unique)
                 .stream()
                 .map(ViewStatsMapper::toDto)
                 .collect(Collectors.toList());

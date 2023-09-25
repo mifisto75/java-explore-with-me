@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface StatsDao {
-    List<ViewStats> getState(LocalDateTime start , LocalDateTime end , String ip);
+    List<ViewStats> getState(LocalDateTime start, LocalDateTime end, List<String> uris, Boolean unique);
 
     EndpointHit addState(EndpointHit endpointHit);
 }
