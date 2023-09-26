@@ -19,13 +19,13 @@ public class StatsDaoImpl implements StatsDao {
     @Override
     public List<ViewStats> getState(LocalDateTime start, LocalDateTime end, List<String> uris, Boolean unique) {
         if (unique) {
-            if (uris.get(0).equals("NULL")){
-                return statsRepository.nullUrisUniqueTrue(start,end);
+            if (uris.get(0).equals("NULL")) {
+                return statsRepository.nullUrisUniqueTrue(start, end);
             }
             return statsRepository.uniqueTrue(start, end, uris);
         } else {
-            if (uris.get(0).equals("NULL")){
-                return statsRepository.nullUrisUniqueFalse(start,end);
+            if (uris.get(0).equals("NULL")) {
+                return statsRepository.nullUrisUniqueFalse(start, end);
             }
             return statsRepository.uniqueFalse(start, end, uris);
         }
