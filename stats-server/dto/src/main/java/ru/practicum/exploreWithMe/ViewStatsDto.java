@@ -6,6 +6,6 @@ import lombok.Data;
 public class ViewStatsDto {
         String app;
         String uri;
-        Long hit;
+        Long hits;
 
 }

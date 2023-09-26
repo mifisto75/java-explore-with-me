@@ -8,7 +8,7 @@ public class ViewStatsMapper {
         ViewStats stats = new ViewStats();
         stats.setApp(dto.getApp());
         stats.setUri(dto.getUri());
-        stats.setHit(dto.getHit());
+        stats.setHits(dto.getHits());
         return stats;
     }
 
@@ -16,7 +16,7 @@ public class ViewStatsMapper {
         ViewStatsDto dto = new ViewStatsDto();
         dto.setApp(stats.getApp());
         dto.setUri(stats.getUri());
-        dto.setHit(stats.getHit());
+        dto.setHits(stats.getHits());
         return dto;
     }
 }

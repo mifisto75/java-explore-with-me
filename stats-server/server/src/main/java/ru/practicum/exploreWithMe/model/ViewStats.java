@@ -9,6 +9,6 @@ import lombok.*;
 public class ViewStats {
     String app;
     String uri;
-    Long hit;
+    Long hits;
 
 }
