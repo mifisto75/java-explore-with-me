@@ -29,10 +29,12 @@ public class BaseClient {
     protected <T> ResponseEntity<Object> post(String path, T body) {
         return post(path, null, body);
     }
+
     protected ResponseEntity<List<ViewStatsDto>> getHit(String uri) {
         return rest.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<List<ViewStatsDto>>() {
         });
     }
+
     private <T> ResponseEntity<Object> makeAndSendRequest(HttpMethod method, String path, @Nullable Map<String, Object> parameters, @Nullable T body) {
         HttpEntity<T> requestEntity = new HttpEntity<>(body, defaultHeaders());
 
