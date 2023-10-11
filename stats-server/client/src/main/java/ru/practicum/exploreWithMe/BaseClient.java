@@ -1,5 +1,6 @@
 package ru.practicum.exploreWithMe;
 
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.lang.Nullable;
 import org.springframework.web.client.HttpStatusCodeException;
@@ -15,9 +16,11 @@ public class BaseClient {
         this.rest = rest;
     }
 
+
     protected ResponseEntity<Object> get(String path, @Nullable Map<String, Object> parameters) {
         return makeAndSendRequest(HttpMethod.GET, path, parameters, null);
     }
+
 
     protected <T> ResponseEntity<Object> post(String path, @Nullable Map<String, Object> parameters, T body) {
         return makeAndSendRequest(HttpMethod.POST, path, parameters, body);
@@ -26,7 +29,10 @@ public class BaseClient {
     protected <T> ResponseEntity<Object> post(String path, T body) {
         return post(path, null, body);
     }
-
+    protected ResponseEntity<List<ViewStatsDto>> getHit(String uri) {
+        return rest.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<List<ViewStatsDto>>() {
+        });
+    }
     private <T> ResponseEntity<Object> makeAndSendRequest(HttpMethod method, String path, @Nullable Map<String, Object> parameters, @Nullable T body) {
         HttpEntity<T> requestEntity = new HttpEntity<>(body, defaultHeaders());
 

@@ -38,4 +38,7 @@ public class StatsClient extends BaseClient {
         );
         return get("/stats?start={start}&end={end}&uris={uris}&unique={unique}", parameters);
     }
+    public ResponseEntity<List<ViewStatsDto>> getHit(String start, String end, String uris, Boolean unique) {
+        return getHit("/stats" + "?start=" + start + "&end=" + end + "&uris=" + uris + "&unique=" + unique);
+    }
 }
