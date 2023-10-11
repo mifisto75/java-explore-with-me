@@ -5,7 +5,6 @@ import ru.practicum.exploreWithMe.essence.event.model.Event;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data

@@ -12,9 +12,7 @@ import ru.practicum.exploreWithMe.essence.category.dto.CategoryDto;
 import ru.practicum.exploreWithMe.essence.compilation.dto.CompilationDto;
 import ru.practicum.exploreWithMe.essence.event.dto.EventFullDto;
 import ru.practicum.exploreWithMe.essence.event.dto.EventShortDto;
-import ru.practicum.exploreWithMe.privateApi.service.PrivateService;
 import ru.practicum.exploreWithMe.publicApi.service.PublicService;
-import ru.practicum.exploreWithMe.publicApi.service.PublicServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.Positive;
@@ -26,6 +24,7 @@ import java.util.List;
 @RestController
 public class PublicController {
     private PublicService publicService;
+
     @Autowired
     public PublicController(PublicService publicService) {
         this.publicService = publicService;
@@ -76,14 +75,14 @@ public class PublicController {
             @RequestParam(defaultValue = "10") @Positive Integer size,
             HttpServletRequest request) {
         log.info("метод publicGetEvents ");
-return new ResponseEntity<>(publicService.publicGetEvents(text,categories,paid,rangeStart,rangeEnd
-        ,onlyAvailable,sort,from,size,request),HttpStatus.OK);
+        return new ResponseEntity<>(publicService.publicGetEvents(text, categories, paid, rangeStart, rangeEnd
+                , onlyAvailable, sort, from, size, request), HttpStatus.OK);
     }
 
     @GetMapping("/events/{id}")
-    public  ResponseEntity<EventFullDto> publicGetEventById(@PathVariable Long id, HttpServletRequest request) {
+    public ResponseEntity<EventFullDto> publicGetEventById(@PathVariable Long id, HttpServletRequest request) {
         log.info("метод publicGetEventById ");
-        return new ResponseEntity<>(publicService.publicGetEventById(id,request),HttpStatus.OK);
+        return new ResponseEntity<>(publicService.publicGetEventById(id, request), HttpStatus.OK);
 
     }
 

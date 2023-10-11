@@ -15,16 +15,18 @@ public class ErrorHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handlerBadRequest(final BadRequest e) {
-        return new ErrorResponse(HttpStatus.BAD_REQUEST.toString() ,"BAD REQUEST", e.getMessage());
+        return new ErrorResponse(HttpStatus.BAD_REQUEST.toString(), "BAD REQUEST", e.getMessage());
     }
+
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handlerNotFound(final NotFound e) {
-        return new ErrorResponse(HttpStatus.NOT_FOUND.toString() ,"NOT FOUND", e.getMessage());
+        return new ErrorResponse(HttpStatus.NOT_FOUND.toString(), "NOT FOUND", e.getMessage());
     }
+
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponse handlerConflict(final Conflict e) {
-        return new ErrorResponse(HttpStatus.CONFLICT.toString() ,"CONFLICT", e.getMessage());
+        return new ErrorResponse(HttpStatus.CONFLICT.toString(), "CONFLICT", e.getMessage());
     }
 }

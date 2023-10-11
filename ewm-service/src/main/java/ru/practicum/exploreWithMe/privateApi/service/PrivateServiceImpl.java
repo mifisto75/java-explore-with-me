@@ -32,8 +32,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static ru.practicum.exploreWithMe.essence.auxiliary.enums.State.PUBLISHED;
-
 @Service
 @RequiredArgsConstructor
 public class PrivateServiceImpl implements PrivateService {
@@ -264,7 +262,7 @@ public class PrivateServiceImpl implements PrivateService {
         if (event.getState().equals(State.PENDING) || event.getState().equals(State.CANCELED)) {
             throw new Conflict("Нарушение целостности данных");
         }
-        if(event.getParticipantLimit()>0){
+        if (event.getParticipantLimit() > 0) {
             if (event.getParticipantLimit().longValue() == event.getConfirmedRequests()) {
                 throw new Conflict("Нарушение целостности данных");
             }

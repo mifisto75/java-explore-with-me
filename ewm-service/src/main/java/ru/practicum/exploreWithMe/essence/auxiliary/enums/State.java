@@ -1,7 +1,7 @@
 package ru.practicum.exploreWithMe.essence.auxiliary.enums;
 
 public enum State {
-    REJECTED , // ОТКЛОНЕННЫЙ
+    REJECTED, // ОТКЛОНЕННЫЙ
     CONFIRMED, // ПОДТВЕРЖДЕННЫЙ
     PENDING, // находящийся на рассмотрении,
     PUBLISHED, // опубликован

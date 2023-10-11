@@ -14,15 +14,16 @@ public class CompilationMapper {
         dto.setEvents(compilation.getEvents()
                 .stream()
                 .map(EventMapper::toEventShortDto)
-                        .collect(Collectors.toList()));
+                .collect(Collectors.toList()));
         dto.setPinned(compilation.getPinned());
         dto.setTitle(compilation.getTitle());
         return dto;
     }
+
     public static Compilation toCompilationFromNewCompilation(NewCompilationDto dto) {
-     Compilation compilation = new Compilation();
-     compilation.setPinned(dto.getPinned());
-     compilation.setTitle(dto.getTitle());
-     return compilation;
+        Compilation compilation = new Compilation();
+        compilation.setPinned(dto.getPinned());
+        compilation.setTitle(dto.getTitle());
+        return compilation;
     }
 }

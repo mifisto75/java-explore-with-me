@@ -111,11 +111,11 @@ public class PublicServiceImpl implements PublicService {
                 throw new BadRequest("некорректно указана дата rangeEnd");
             }
             whereClause = whereClause.and(QEvent.event.eventDate.between(rangeStart, rangeEnd));
-        }else if (rangeStart != null && rangeEnd == null) {
+        } else if (rangeStart != null && rangeEnd == null) {
             whereClause = whereClause.and(QEvent.event.eventDate.goe(rangeStart));
-        }else if (rangeStart == null && rangeEnd != null) {
+        } else if (rangeStart == null && rangeEnd != null) {
             whereClause = whereClause.and(QEvent.event.eventDate.loe(rangeEnd));
-        }else if (rangeStart == null && rangeEnd == null) {
+        } else if (rangeStart == null && rangeEnd == null) {
             whereClause = whereClause.and(QEvent.event.eventDate.after(LocalDateTime.now()));
         }
 

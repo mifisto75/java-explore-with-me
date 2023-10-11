@@ -9,10 +9,10 @@ import ru.practicum.exploreWithMe.essence.compilation.repository.CompilationRepo
 import ru.practicum.exploreWithMe.essence.event.model.Event;
 import ru.practicum.exploreWithMe.essence.event.repository.EventRepository;
 import ru.practicum.exploreWithMe.essence.exeptions.NotFound;
-import ru.practicum.exploreWithMe.essence.request.model.ParticipationRequest;
 import ru.practicum.exploreWithMe.essence.request.repository.RequestRepository;
 import ru.practicum.exploreWithMe.essence.user.model.User;
 import ru.practicum.exploreWithMe.essence.user.repository.UserRepository;
+
 @Component
 @RequiredArgsConstructor
 public class AllRepository {

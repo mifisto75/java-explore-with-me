@@ -1,9 +1,7 @@
 package ru.practicum.exploreWithMe.essence.event.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Builder;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
 import ru.practicum.exploreWithMe.essence.location.LocationDto;
 
 import javax.validation.Valid;
@@ -29,7 +27,7 @@ public class NewEventDto {
     LocalDateTime eventDate; // Дата и время на которые намечено событие (в формате "yyyy-MM-dd HH:mm:ss")
     @NotNull
     @Valid
-     LocationDto location;
+    LocationDto location;
     Boolean paid; // нужно ли оплачивать участие
     @PositiveOrZero
     Integer participantLimit; // Ограничение на количество участников. Значение 0 - означает отсутствие ограничения

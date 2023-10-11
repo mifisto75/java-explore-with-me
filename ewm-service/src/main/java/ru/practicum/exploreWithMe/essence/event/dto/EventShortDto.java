@@ -14,7 +14,7 @@ public class EventShortDto {
     Long confirmedRequests; // Количество одобренных заявок на участие в данном событии
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     LocalDateTime eventDate; // Дата и время на которые намечено событие (в формате "yyyy-MM-dd HH:mm:ss")
-    long id ;
+    long id;
     UserShortDto initiator; //Пользователь (краткая информация)
     Boolean paid; // ужно ли оплачивать участие
     String title; // Заголовок

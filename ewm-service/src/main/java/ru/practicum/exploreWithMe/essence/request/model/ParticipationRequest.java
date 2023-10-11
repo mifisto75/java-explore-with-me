@@ -1,8 +1,8 @@
 package ru.practicum.exploreWithMe.essence.request.model;
 
 import lombok.Data;
-import ru.practicum.exploreWithMe.essence.event.model.Event;
 import ru.practicum.exploreWithMe.essence.auxiliary.enums.State;
+import ru.practicum.exploreWithMe.essence.event.model.Event;
 import ru.practicum.exploreWithMe.essence.user.model.User;
 
 import javax.persistence.*;

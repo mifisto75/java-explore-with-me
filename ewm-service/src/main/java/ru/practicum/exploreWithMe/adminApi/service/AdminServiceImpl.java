@@ -3,8 +3,6 @@ package ru.practicum.exploreWithMe.adminApi.service;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.querydsl.QSort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.exploreWithMe.essence.auxiliary.AllRepository;
@@ -36,7 +34,9 @@ import ru.practicum.exploreWithMe.essence.user.model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,7 +55,7 @@ public class AdminServiceImpl implements AdminService {
                 .from(QCategory.category)
                 .where(QCategory.category.name.in(newCategoryDto.getName()))
                 .fetchFirst();
-        if (name != null){
+        if (name != null) {
             throw new Conflict("Нарушение целостности данных");
         }
         return CategoryMapper.toCategoryDto(allRepository.categoryRepository.save(CategoryMapper.toCategoryFromNew(newCategoryDto)));
@@ -79,13 +79,13 @@ public class AdminServiceImpl implements AdminService {
                 .from(QCategory.category)
                 .where(QCategory.category.name.in(newCategoryDto.getName()))
                 .fetchFirst();
-        if (name != null){
-            if (name.getId() != catId){
+        if (name != null) {
+            if (name.getId() != catId) {
                 throw new Conflict("Нарушение целостности данных");
             }
         }
         category.setName(newCategoryDto.getName());
-            allRepository.categoryRepository.save(category);
+        allRepository.categoryRepository.save(category);
         return CategoryMapper.toCategoryDto(category);
     }
 
@@ -131,19 +131,19 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public EventFullDto adminUpdateEvents(Long eventId, UpdateEventAdminRequest update) {
         Event event = allRepository.getEventById(eventId);
-        if(update.getEventDate() != null){
+        if (update.getEventDate() != null) {
             if (update.getEventDate().isBefore(LocalDateTime.now())) {
                 throw new BadRequest("Запрос составлен некорректно");
             }
         }
-        if (event.getState().equals(State.PUBLISHED) || event.getState().equals(State.CANCELED)){
+        if (event.getState().equals(State.PUBLISHED) || event.getState().equals(State.CANCELED)) {
             throw new Conflict("Нарушение целостности данных");
         }
         Optional.ofNullable(update.getAnnotation()).ifPresent(event::setAnnotation);
         if (update.getCategory() != null) {
             event.setCategory(allRepository.getCategoryById(update.getCategory()));
         }
-        if (update.getStateAction() != null){
+        if (update.getStateAction() != null) {
             if (update.getStateAction().equals(AdminStateAction.PUBLISH_EVENT)) {
                 event.setState(State.PUBLISHED);
             } else {
@@ -184,13 +184,13 @@ public class AdminServiceImpl implements AdminService {
     @Transactional
     @Override
     public UserDto adminAddUser(NewUserRequest newUserRequest) {
-       String email = new JPAQuery<QUser>(entityManager)
+        String email = new JPAQuery<QUser>(entityManager)
                 .select(QUser.user.email)
                 .from(QUser.user)
                 .where(QUser.user.email.in(newUserRequest.getEmail()))
                 .fetchFirst();
-        if (email != null){
-                throw new Conflict("Нарушение целостности данных");
+        if (email != null) {
+            throw new Conflict("Нарушение целостности данных");
         }
         return UserMapper.toUserDto(allRepository.userRepository.save(UserMapper.toUserFromNewUser(newUserRequest)));
     }
@@ -212,11 +212,11 @@ public class AdminServiceImpl implements AdminService {
                     .stream()
                     .map(allRepository::getEventById)
                     .collect(Collectors.toList()));
-        }else {
-            List<Event>  nul = new ArrayList<>();
+        } else {
+            List<Event> nul = new ArrayList<>();
             compilation.setEvents(nul);
         }
-        if (newCompilationDto.getPinned()==null){
+        if (newCompilationDto.getPinned() == null) {
             compilation.setPinned(false);
         }
         return CompilationMapper.toCompilationDto(allRepository.compilationRepository.save(compilation));

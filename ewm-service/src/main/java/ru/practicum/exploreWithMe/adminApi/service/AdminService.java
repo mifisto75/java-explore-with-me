@@ -1,6 +1,7 @@
 package ru.practicum.exploreWithMe.adminApi.service;
 
 import org.springframework.transaction.annotation.Transactional;
+import ru.practicum.exploreWithMe.essence.auxiliary.enums.State;
 import ru.practicum.exploreWithMe.essence.category.dto.CategoryDto;
 import ru.practicum.exploreWithMe.essence.category.dto.NewCategoryDto;
 import ru.practicum.exploreWithMe.essence.compilation.dto.CompilationDto;
@@ -8,7 +9,6 @@ import ru.practicum.exploreWithMe.essence.compilation.dto.NewCompilationDto;
 import ru.practicum.exploreWithMe.essence.compilation.dto.UpdateCompilationRequest;
 import ru.practicum.exploreWithMe.essence.event.dto.EventFullDto;
 import ru.practicum.exploreWithMe.essence.event.dto.update.UpdateEventAdminRequest;
-import ru.practicum.exploreWithMe.essence.auxiliary.enums.State;
 import ru.practicum.exploreWithMe.essence.user.dto.NewUserRequest;
 import ru.practicum.exploreWithMe.essence.user.dto.UserDto;
 

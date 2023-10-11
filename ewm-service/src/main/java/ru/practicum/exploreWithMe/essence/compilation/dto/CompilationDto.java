@@ -4,7 +4,6 @@ import lombok.Data;
 import ru.practicum.exploreWithMe.essence.event.dto.EventShortDto;
 
 import java.util.List;
-import java.util.Set;
 
 @Data
 public class CompilationDto {
