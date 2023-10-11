@@ -79,7 +79,7 @@ public class PrivateServiceImpl implements PrivateService {
     @Override
     public EventFullDto getEventByIdOneUser(Long userId, Long eventId) {
         Event event = allRepository.getEventById(eventId);
-        OwnerEventVerification(event.getInitiator().getId(), userId);
+        ownerEventVerification(event.getInitiator().getId(), userId);
         return EventMapper.toEventFullDto(event);
     }
 
@@ -91,7 +91,7 @@ public class PrivateServiceImpl implements PrivateService {
         if (event.getState().equals(State.PUBLISHED)) {
             throw new Conflict("Нарушение целостности данных");
         }
-        OwnerEventVerification(event.getInitiator().getId(), userId);
+        ownerEventVerification(event.getInitiator().getId(), userId);
         if (update.getEventDate() != null) {
             if (update.getEventDate().isBefore(LocalDateTime.now())) {
                 throw new BadRequest("Запрос составлен некорректно");
@@ -122,7 +122,7 @@ public class PrivateServiceImpl implements PrivateService {
     @Override
     public List<ParticipationRequestDto> getRequestsByEventId(Long userId, Long eventId) {
         Event event = allRepository.getEventById(eventId);
-        OwnerEventVerification(event.getInitiator().getId(), userId);
+        ownerEventVerification(event.getInitiator().getId(), userId);
         List<ParticipationRequest> list;
         list = new JPAQuery<ParticipationRequest>(entityManager)
                 .select(QParticipationRequest.participationRequest)
@@ -143,7 +143,7 @@ public class PrivateServiceImpl implements PrivateService {
 
         Event event = allRepository.getEventById(eventId);
 
-        OwnerEventVerification(event.getInitiator().getId(), userId);
+        ownerEventVerification(event.getInitiator().getId(), userId);
 
         if (event.getParticipantLimit() == 0 || !event.getRequestModeration()) {
             throw new BadRequest("Запрос составлен некорректно");
@@ -294,7 +294,7 @@ public class PrivateServiceImpl implements PrivateService {
         return RequestMapper.toDto(request);
     }
 
-    private void OwnerEventVerification(Long eId, Long uId) {
+    private void ownerEventVerification(Long eId, Long uId) {
         if (eId != uId) {
             throw new BadRequest("нельзя изменить чужие ивенты");
         }

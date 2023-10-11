@@ -13,10 +13,10 @@ public class ErrorResponse {
     String timestamp;
 
 
-    public ErrorResponse(String status ,String message , String reason) {
-this.status = status;
-this.message = message ;
-this.reason =reason;
-this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    public ErrorResponse(String status, String message, String reason) {
+        this.status = status;
+        this.message = message;
+        this.reason = reason;
+        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 }

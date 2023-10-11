@@ -75,8 +75,8 @@ public class PublicController {
             @RequestParam(defaultValue = "10") @Positive Integer size,
             HttpServletRequest request) {
         log.info("метод publicGetEvents ");
-        return new ResponseEntity<>(publicService.publicGetEvents(text, categories, paid, rangeStart, rangeEnd
-                , onlyAvailable, sort, from, size, request), HttpStatus.OK);
+        return new ResponseEntity<>(publicService.publicGetEvents(text, categories, paid, rangeStart, rangeEnd,
+                onlyAvailable, sort, from, size, request), HttpStatus.OK);
     }
 
     @GetMapping("/events/{id}")
