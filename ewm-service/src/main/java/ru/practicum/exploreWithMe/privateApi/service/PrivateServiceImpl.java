@@ -295,7 +295,7 @@ public class PrivateServiceImpl implements PrivateService {
     }
 
     private void ownerEventVerification(Long eId, Long uId) {
-        if (eId != uId) {
+        if (eId.longValue() != uId.longValue()) {
             throw new BadRequest("нельзя изменить чужие ивенты");
         }
     }
