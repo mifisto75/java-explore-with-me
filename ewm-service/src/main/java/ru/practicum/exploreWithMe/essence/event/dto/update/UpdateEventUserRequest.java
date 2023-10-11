@@ -6,7 +6,6 @@ import ru.practicum.exploreWithMe.essence.auxiliary.enums.UserStateAction;
 import ru.practicum.exploreWithMe.essence.location.LocationDto;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
