@@ -18,7 +18,7 @@ public class BaseClient {
 
 
     protected ResponseEntity<Object> get(String path, @Nullable Map<String, Object> parameters) {
-        return makeAndSendRequest(HttpMethod.GET, path ,null, parameters, null);
+        return makeAndSendRequest(HttpMethod.GET, path, null, parameters, null);
     }
 
 
@@ -27,7 +27,7 @@ public class BaseClient {
     }
 
     protected <T> ResponseEntity<Object> post(String path, T body) {
-        return post(path, null,null, body);
+        return post(path, null, null, body);
     }
 
     protected ResponseEntity<List<ViewStatsDto>> getHit(String uri) {
