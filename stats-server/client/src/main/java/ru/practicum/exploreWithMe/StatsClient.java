@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
 import java.util.List;
+
 @Service
 public class StatsClient extends BaseClient {
 
