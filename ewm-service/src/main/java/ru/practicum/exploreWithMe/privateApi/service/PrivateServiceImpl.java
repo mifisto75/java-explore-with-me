@@ -252,6 +252,7 @@ public class PrivateServiceImpl implements PrivateService {
                 .where(QParticipationRequest.participationRequest.requester.id.in(userId)
                         .and(QParticipationRequest.participationRequest.event.id.in(eventId)))
                 .fetchFirst();
+
         if (requests != null) {
             throw new Conflict("Нарушение целостности данных");
         }
@@ -272,8 +273,10 @@ public class PrivateServiceImpl implements PrivateService {
         request.setEvent(allRepository.getEventById(eventId));
         request.setRequester(allRepository.getUserById(userId));
         request.setCreated(LocalDateTime.now());
-        if (event.getParticipantLimit().longValue() == 0) {
+        if (event.getParticipantLimit().longValue() == 0 || !event.getRequestModeration()) {
             request.setStatus(State.CONFIRMED);
+            event.setConfirmedRequests(event.getConfirmedRequests() + 1);
+            allRepository.eventRepository.save(event);
         } else {
             request.setStatus(State.PENDING);
         }
