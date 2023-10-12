@@ -111,10 +111,6 @@ public class PublicServiceImpl implements PublicService {
                 throw new BadRequest("некорректно указана дата rangeEnd");
             }
             whereClause = whereClause.and(QEvent.event.eventDate.between(rangeStart, rangeEnd));
-        } else if (rangeStart != null && rangeEnd == null) {
-            whereClause = whereClause.and(QEvent.event.eventDate.goe(rangeStart));
-        } else if (rangeStart == null && rangeEnd != null) {
-            whereClause = whereClause.and(QEvent.event.eventDate.loe(rangeEnd));
         } else if (rangeStart == null && rangeEnd == null) {
             whereClause = whereClause.and(QEvent.event.eventDate.after(LocalDateTime.now()));
         }
@@ -185,7 +181,7 @@ public class PublicServiceImpl implements PublicService {
             throw new NotFound("Событие не найдено или недоступно");
         }
         addHit(request);
-        event.setViews(getHit(request, event.getCreatedOn()));
+        event.setViews(getHit(request));
         allRepository.eventRepository.save(event);
         return EventMapper.toEventFullDto(event);
     }
@@ -199,7 +195,7 @@ public class PublicServiceImpl implements PublicService {
         statsClient.addState(dto);
     }
 
-    private Long getHit(HttpServletRequest request, LocalDateTime start) {
+    private Long getHit(HttpServletRequest request) {
         List<ViewStatsDto> dtoList = statsClient.getHit("2020-10-11 03:48:05", "2099-10-11 03:48:05", request.getRequestURI(), true).getBody();
         Long hit = dtoList.get(0).getHits();
         return hit;

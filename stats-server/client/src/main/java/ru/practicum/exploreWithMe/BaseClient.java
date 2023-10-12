@@ -18,16 +18,16 @@ public class BaseClient {
 
 
     protected ResponseEntity<Object> get(String path, @Nullable Map<String, Object> parameters) {
-        return makeAndSendRequest(HttpMethod.GET, path, parameters, null);
+        return makeAndSendRequest(HttpMethod.GET, path ,null, parameters, null);
     }
 
 
-    protected <T> ResponseEntity<Object> post(String path, @Nullable Map<String, Object> parameters, T body) {
-        return makeAndSendRequest(HttpMethod.POST, path, parameters, body);
+    protected <T> ResponseEntity<Object> post(String path, Long userId, @Nullable Map<String, Object> parameters, T body) {
+        return makeAndSendRequest(HttpMethod.POST, path, userId, parameters, body);
     }
 
     protected <T> ResponseEntity<Object> post(String path, T body) {
-        return post(path, null, body);
+        return post(path, null,null, body);
     }
 
     protected ResponseEntity<List<ViewStatsDto>> getHit(String uri) {
@@ -35,9 +35,8 @@ public class BaseClient {
         });
     }
 
-    private <T> ResponseEntity<Object> makeAndSendRequest(HttpMethod method, String path, @Nullable Map<String, Object> parameters, @Nullable T body) {
-        HttpEntity<T> requestEntity = new HttpEntity<>(body, defaultHeaders());
-
+    private <T> ResponseEntity<Object> makeAndSendRequest(HttpMethod method, String path, Long userId, @Nullable Map<String, Object> parameters, @Nullable T body) {
+        HttpEntity<T> requestEntity = new HttpEntity<>(body, defaultHeaders(userId));
         ResponseEntity<Object> serverResponse;
         try {
             if (parameters != null) {
@@ -51,10 +50,13 @@ public class BaseClient {
         return prepareGatewayResponse(serverResponse);
     }
 
-    private HttpHeaders defaultHeaders() {
+    private HttpHeaders defaultHeaders(Long userId) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
+        if (userId != null) {
+            headers.set("X-Sharer-User-Id", String.valueOf(userId));
+        }
         return headers;
     }
 
