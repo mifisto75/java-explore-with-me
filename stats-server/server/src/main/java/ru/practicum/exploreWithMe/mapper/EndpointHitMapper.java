@@ -28,4 +28,5 @@ public class EndpointHitMapper {
         dto.setTimestamp(LocalDateTime.parse(hit.getTimestamp().format(FORMAT), FORMAT));
         return dto;
     }
+
 }

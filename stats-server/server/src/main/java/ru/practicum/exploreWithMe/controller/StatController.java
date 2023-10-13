@@ -2,6 +2,7 @@ package ru.practicum.exploreWithMe.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.exploreWithMe.EndpointHitDto;
 import ru.practicum.exploreWithMe.ViewStatsDto;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@RequestMapping
 public class StatController {
 
     private final StatService statService;
@@ -22,6 +24,7 @@ public class StatController {
     }
 
     @PostMapping("/hit")
+    @ResponseStatus(HttpStatus.CREATED)
     public EndpointHitDto saveStat(@RequestBody EndpointHitDto endpointHitDto) {
         log.info("метод saveStat endpointHitDto = " + endpointHitDto);
         return statService.addState(endpointHitDto);
