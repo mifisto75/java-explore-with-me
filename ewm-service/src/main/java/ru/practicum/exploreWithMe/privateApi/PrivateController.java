@@ -102,4 +102,36 @@ public class PrivateController {
         log.info("метод cancellationRequest ");
         return new ResponseEntity<>(privateService.cancellationRequest(userId, requestId), HttpStatus.OK);
     }
+
+    //like
+    @PostMapping("/{userId}/events/{eventId}/like")
+    public ResponseEntity<EventShortDto> addLike(@PathVariable Long userId,
+                                                 @PathVariable Long eventId) {
+        log.info("метод addLike ");
+        return new ResponseEntity<>(privateService.addLike(userId, eventId), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{userId}/events/{eventId}/like")
+    public ResponseEntity<EventShortDto> deleteLike(@PathVariable Long userId,
+                                                    @PathVariable Long eventId) {
+        log.info("метод deleteLike ");
+        privateService.deleteLike(userId, eventId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/{userId}/events/{eventId}/dislike")
+    public ResponseEntity<EventShortDto> addDislike(@PathVariable Long userId,
+                                                    @PathVariable Long eventId) {
+        log.info("метод addDislike ");
+
+        return new ResponseEntity<>(privateService.addDislike(userId, eventId), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{userId}/events/{eventId}/dislike")
+    public ResponseEntity<EventShortDto> deleteDislike(@PathVariable Long userId,
+                                                       @PathVariable Long eventId) {
+        log.info("метод deleteDislike ");
+        privateService.deleteDislike(userId, eventId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

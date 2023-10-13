@@ -30,4 +30,6 @@ public class EventFullDto {
     State state; // Список состояний жизненного цикла события
     String title; // Заголовок
     Long views; // Количество просмотрев события
+    Long like;
+    Long dislike;
 }

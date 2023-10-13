@@ -5,6 +5,7 @@ import lombok.Data;
 import ru.practicum.exploreWithMe.essence.category.dto.CategoryDto;
 import ru.practicum.exploreWithMe.essence.user.dto.UserShortDto;
 
+import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 @Data
@@ -19,4 +20,6 @@ public class EventShortDto {
     Boolean paid; // ужно ли оплачивать участие
     String title; // Заголовок
     Long views; // Количество просмотрев события
+    Long like;
+    Long dislike;
 }

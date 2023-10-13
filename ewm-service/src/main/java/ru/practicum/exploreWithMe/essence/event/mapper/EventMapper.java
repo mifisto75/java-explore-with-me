@@ -31,6 +31,8 @@ public class EventMapper {
         dto.setState(event.getState());
         dto.setTitle(event.getTitle());
         dto.setViews(event.getViews());
+        dto.setLike(event.getLike());
+        dto.setDislike(event.getDislike());
         return dto;
     }
 
@@ -45,6 +47,8 @@ public class EventMapper {
         dto.setPaid(event.getPaid());
         dto.setTitle(event.getTitle());
         dto.setViews(event.getViews());
+        dto.setLike(event.getLike());
+        dto.setDislike(event.getDislike());
         return dto;
     }
 
@@ -63,6 +67,8 @@ public class EventMapper {
         event.setState(State.PENDING);
         event.setTitle(newEventDto.getTitle());
         event.setViews(0L);
+        event.setLike(0L);
+        event.setDislike(0L);
         return event;
     }
 }

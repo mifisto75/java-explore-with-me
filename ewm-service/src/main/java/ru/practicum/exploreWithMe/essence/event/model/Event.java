@@ -53,6 +53,9 @@ public class Event {
     String title; // Заголовок
     @Column(name = "views")
     Long views; // Количество просмотрев события
-
+    @Column(name = "likes")
+    Long like;
+    @Column(name = "dislikes")
+    Long dislike;
 
 }
