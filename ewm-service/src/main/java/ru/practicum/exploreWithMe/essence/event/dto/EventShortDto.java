@@ -5,7 +5,6 @@ import lombok.Data;
 import ru.practicum.exploreWithMe.essence.category.dto.CategoryDto;
 import ru.practicum.exploreWithMe.essence.user.dto.UserShortDto;
 
-import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 @Data

@@ -22,7 +22,7 @@ public class AllRepository {
     public final UserRepository userRepository;
     public final CompilationRepository compilationRepository;
     public final RequestRepository requestRepository;
-    public final LikeRepository likeRepository ;
+    public final LikeRepository likeRepository;
 
 
     public Category getCategoryById(Long catId) {

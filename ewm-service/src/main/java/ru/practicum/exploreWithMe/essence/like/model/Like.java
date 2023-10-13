@@ -22,5 +22,5 @@ public class Like {
     @JoinColumn(name = "user_id", nullable = false)
     User user;
     @Column(name = "is_positive", nullable = false)
-    Boolean IsPositive;
+    Boolean isPositive;
 }

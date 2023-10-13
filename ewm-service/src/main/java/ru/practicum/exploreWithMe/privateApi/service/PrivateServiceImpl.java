@@ -306,22 +306,22 @@ public class PrivateServiceImpl implements PrivateService {
     public EventShortDto addLike(Long userId, Long eventId) {
         Event event = allRepository.getEventById(eventId);
         User user = allRepository.getUserById(userId);
-        Like like =  new JPAQuery<Like>(entityManager)
+        Like like = new JPAQuery<Like>(entityManager)
                 .select(QLike.like)
                 .from(QLike.like)
                 .where(QLike.like.event.id.in(eventId)
                         .and(QLike.like.user.id.in(userId)))
                 .fetchFirst();
-        if (like != null){
-            if (like.getIsPositive()){
+        if (like != null) {
+            if (like.getIsPositive()) {
                 throw new Conflict("Нарушение целостности данных. вы уже поставили лайк этому ивенту");
-            }else {
-               allRepository.likeRepository.delete(like);
-               event.setDislike(event.getDislike()-1);
+            } else {
+                allRepository.likeRepository.delete(like);
+                event.setDislike(event.getDislike() - 1);
             }
         }
-        allRepository.likeRepository.save(LikeMapper.newLike(event,user,Boolean.TRUE));
-        event.setLike(event.getLike()+1);
+        allRepository.likeRepository.save(LikeMapper.newLike(event, user, Boolean.TRUE));
+        event.setLike(event.getLike() + 1);
         allRepository.eventRepository.save(event);
         return EventMapper.toEventShortDto(event);
     }
@@ -330,22 +330,22 @@ public class PrivateServiceImpl implements PrivateService {
     public void deleteLike(Long userId, Long eventId) {
         Event event = allRepository.getEventById(eventId);
         User user = allRepository.getUserById(userId);
-        Like like =  new JPAQuery<Like>(entityManager)
+        Like like = new JPAQuery<Like>(entityManager)
                 .select(QLike.like)
                 .from(QLike.like)
                 .where(QLike.like.event.id.in(eventId)
                         .and(QLike.like.user.id.in(userId)))
                 .fetchFirst();
-        if (like != null){
-            if (like.getIsPositive()){
-     allRepository.likeRepository.delete(like);
-     event.setLike(event.getLike()-1);
-     allRepository.eventRepository.save(event);
-            }else {
+        if (like != null) {
+            if (like.getIsPositive()) {
+                allRepository.likeRepository.delete(like);
+                event.setLike(event.getLike() - 1);
+                allRepository.eventRepository.save(event);
+            } else {
                 throw new Conflict("Нарушение целостности данных");
             }
-        }else {
-           throw new NotFound("лайк не найдена");
+        } else {
+            throw new NotFound("лайк не найдена");
         }
     }
 
@@ -353,22 +353,22 @@ public class PrivateServiceImpl implements PrivateService {
     public EventShortDto addDislike(Long userId, Long eventId) {
         Event event = allRepository.getEventById(eventId);
         User user = allRepository.getUserById(userId);
-        Like like =  new JPAQuery<Like>(entityManager)
+        Like like = new JPAQuery<Like>(entityManager)
                 .select(QLike.like)
                 .from(QLike.like)
                 .where(QLike.like.event.id.in(eventId)
                         .and(QLike.like.user.id.in(userId)))
                 .fetchFirst();
-        if (like != null){
-            if (like.getIsPositive()){
-               allRepository.likeRepository.delete(like);
-               event.setLike(event.getLike()-1);
-            }else {
+        if (like != null) {
+            if (like.getIsPositive()) {
+                allRepository.likeRepository.delete(like);
+                event.setLike(event.getLike() - 1);
+            } else {
                 throw new Conflict("Нарушение целостности данных. вы уже поставили дизлайк этому ивенту");
             }
         }
-        allRepository.likeRepository.save(LikeMapper.newLike(event,user,Boolean.FALSE));
-        event.setDislike(event.getDislike()+1);
+        allRepository.likeRepository.save(LikeMapper.newLike(event, user, Boolean.FALSE));
+        event.setDislike(event.getDislike() + 1);
         allRepository.eventRepository.save(event);
         return EventMapper.toEventShortDto(event);
     }
@@ -377,21 +377,21 @@ public class PrivateServiceImpl implements PrivateService {
     public void deleteDislike(Long userId, Long eventId) {
         Event event = allRepository.getEventById(eventId);
         User user = allRepository.getUserById(userId);
-        Like like =  new JPAQuery<Like>(entityManager)
+        Like like = new JPAQuery<Like>(entityManager)
                 .select(QLike.like)
                 .from(QLike.like)
                 .where(QLike.like.event.id.in(eventId)
                         .and(QLike.like.user.id.in(userId)))
                 .fetchFirst();
-        if (like != null){
-            if (like.getIsPositive()){
+        if (like != null) {
+            if (like.getIsPositive()) {
                 throw new Conflict("Нарушение целостности данных");
-            }else {
+            } else {
                 allRepository.likeRepository.delete(like);
-                event.setDislike(event.getDislike()-1);
+                event.setDislike(event.getDislike() - 1);
                 allRepository.eventRepository.save(event);
             }
-        }else {
+        } else {
             throw new NotFound("лайк не найдена");
         }
     }
