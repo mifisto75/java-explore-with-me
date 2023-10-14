@@ -19,4 +19,6 @@ public class EventShortDto {
     Boolean paid; // ужно ли оплачивать участие
     String title; // Заголовок
     Long views; // Количество просмотрев события
+    Long like;
+    Long dislike;
 }

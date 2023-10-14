@@ -145,7 +145,6 @@ public class PublicServiceImpl implements PublicService {
                         .limit(size)
                         .fetch();
                 addHit(request);
-
             } else if (sort.equalsIgnoreCase("VIEWS")) {
                 eventList = new JPAQuery<Event>(entityManager)
                         .select(QEvent.event)
@@ -156,6 +155,38 @@ public class PublicServiceImpl implements PublicService {
                         .limit(size)
                         .fetch();
                 addHit(request);
+            } else if (sort.equalsIgnoreCase("LIKE")) {
+                eventList = new JPAQuery<Event>(entityManager)
+                        .select(QEvent.event)
+                        .from(QEvent.event)
+                        .where(whereClause)
+                        .orderBy(QEvent.event.like.asc())
+                        .offset(from)
+                        .limit(size)
+                        .fetch();
+                addHit(request);
+            } else if (sort.equalsIgnoreCase("DISLIKE")) {
+                eventList = new JPAQuery<Event>(entityManager)
+                        .select(QEvent.event)
+                        .from(QEvent.event)
+                        .where(whereClause)
+                        .orderBy(QEvent.event.dislike.asc())
+                        .offset(from)
+                        .limit(size)
+                        .fetch();
+                addHit(request);
+            } else if (sort.equalsIgnoreCase("RATING")) {
+                eventList = new JPAQuery<Event>(entityManager)
+                        .select(QEvent.event)
+                        .from(QEvent.event)
+                        .where(whereClause)
+                        .orderBy(QEvent.event.like.subtract(QEvent.event.dislike).asc())
+                        .offset(from)
+                        .limit(size)
+                        .fetch();
+                addHit(request);
+            } else {
+                throw new BadRequest("некорректно указан фильтр sort");
             }
         } else {
             eventList = new JPAQuery<Event>(entityManager)

@@ -29,4 +29,12 @@ public interface PrivateService {
     ParticipationRequestDto addRequest(Long userId, Long eventId);
 
     ParticipationRequestDto cancellationRequest(Long userId, Long requestId);
+
+    EventShortDto addLike(Long userId, Long eventId);
+
+    void deleteLike(Long userId, Long eventId);
+
+    EventShortDto addDislike(Long userId, Long eventId);
+
+    void deleteDislike(Long userId, Long eventId);
 }

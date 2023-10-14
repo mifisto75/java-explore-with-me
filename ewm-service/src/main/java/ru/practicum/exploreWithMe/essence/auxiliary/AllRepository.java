@@ -9,6 +9,7 @@ import ru.practicum.exploreWithMe.essence.compilation.repository.CompilationRepo
 import ru.practicum.exploreWithMe.essence.event.model.Event;
 import ru.practicum.exploreWithMe.essence.event.repository.EventRepository;
 import ru.practicum.exploreWithMe.essence.exeptions.NotFound;
+import ru.practicum.exploreWithMe.essence.like.repository.LikeRepository;
 import ru.practicum.exploreWithMe.essence.request.repository.RequestRepository;
 import ru.practicum.exploreWithMe.essence.user.model.User;
 import ru.practicum.exploreWithMe.essence.user.repository.UserRepository;
@@ -21,6 +22,8 @@ public class AllRepository {
     public final UserRepository userRepository;
     public final CompilationRepository compilationRepository;
     public final RequestRepository requestRepository;
+    public final LikeRepository likeRepository;
+
 
     public Category getCategoryById(Long catId) {
         return categoryRepository
