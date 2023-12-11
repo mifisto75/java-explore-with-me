@@ -1,6 +1,6 @@
 package ru.practicum.exploreWithMe.essence.auxiliary.enums;
 
 public enum AdminStateAction {
-    PUBLISH_EVENT, // ПУБЛИКАЦИЯ СОБЫТИЯ
-    REJECT_EVENT // ОТКЛОНИТЬ СОБЫТИЕ
+    PUBLISH_EVENT, // публикация события
+    REJECT_EVENT // отклонить событие
 }

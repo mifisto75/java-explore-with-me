@@ -13,20 +13,20 @@ import java.time.LocalDateTime;
 @Data
 public class UpdateEventUserRequest {
     @Size(min = 20, max = 2000)
-    String annotation; // Краткое описание  annotation
-    Long category; // Категория category
+    String annotation; // Краткое описание
+    Long category; // Категория
     @Size(min = 20, max = 7000)
-    String description; //Новое описание description
+    String description; //Новое описание
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    LocalDateTime eventDate; // eventDate
+    LocalDateTime eventDate;
     @Valid
     LocationDto location;
-    Boolean paid; // ужно ли оплачивать участие paid
+    Boolean paid; // ужно ли оплачивать участие
     @PositiveOrZero
-    Integer participantLimit; // Ограничение на количество участников. Значение 0 - означает отсутствие ограничения participantLimit
-    Boolean requestModeration; // Нужна ли пре-модерация заявок на участие requestModeration
+    Integer participantLimit; // Ограничение на количество участников. Значение 0 - означает отсутствие ограничения
+    Boolean requestModeration; // Нужна ли пре-модерация заявок на участие
 
-    UserStateAction stateAction; // Новое состояние события stateAction
+    UserStateAction stateAction; // Новое состояние события
     @Size(min = 3, max = 120)
-    String title; // Заголовок title
+    String title; // Заголовок
 }
