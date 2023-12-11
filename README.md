@@ -1,7 +1,5 @@
 # java-explore-with-me
 
-https://github.com/mifisto75/java-explore-with-me/pull/5
-
 Это многосервисное приложение по поиску интересных событий ,мероприятий или ивентов .
 
 Технологии и инструменты:
